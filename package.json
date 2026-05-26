@@ -1,0 +1,72 @@
+{
+  "name": "github-gh-explorer",
+  "displayName": "GitHub (gh) Explorer",
+  "description": "Browse your GitHub account in a Tree View using the gh CLI.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "SCM Providers"
+  ],
+  "activationEvents": [
+    "onView:githubGhExplorer"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "githubGhExplorer",
+          "name": "GitHub (gh)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "githubGhExplorer.refresh",
+        "title": "GitHub (gh): Refresh"
+      },
+      {
+        "command": "githubGhExplorer.openInBrowser",
+        "title": "GitHub (gh): Open in Browser"
+      },
+      {
+        "command": "githubGhExplorer.copyCloneUrl",
+        "title": "GitHub (gh): Copy Clone URL"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "githubGhExplorer.refresh",
+          "when": "view == githubGhExplorer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "githubGhExplorer.openInBrowser",
+          "when": "view == githubGhExplorer && viewItem == githubRepo",
+          "group": "navigation"
+        },
+        {
+          "command": "githubGhExplorer.copyCloneUrl",
+          "when": "view == githubGhExplorer && viewItem == githubRepo",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.5.4"
+  }
+}
